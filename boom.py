@@ -85,6 +85,14 @@ APIS = [
             'phone': '手机号码'
         }
     },
+    # xiezuocat
+    {
+        'url': 'https://xiezuocat.com/verify?type=signup',
+        'payload': True,
+        'body': {
+            'phone': '86-手机号码'
+        }
+    },
 ]
 
 
@@ -100,6 +108,8 @@ def sendSMS(API, phone):
     try:
         if body:
             body = eval(str(body).replace("手机号码", phone)) if isinstance(body, dict) else body.replace("手机号码", phone)
+            if API.get('payload'):
+                body = json.dumps(body)
             r = requests.post(url, body, headers=headers)
         else:
             r = requests.get(url, headers=headers)
